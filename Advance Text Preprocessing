@@ -1,0 +1,15 @@
+fd = open("data.txt", "r")
+txt = fd.read()
+fd.close()
+print("Before cleaning the file:")
+print(txt)
+print()
+
+#Cleaning the txt file
+print("After cleaning the file: ")
+for i in range(1, 10):
+    pattern = f"{[i]}"
+    txt = txt.replace(pattern, "")
+
+print(txt)
+print()
