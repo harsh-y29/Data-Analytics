@@ -1,0 +1,10 @@
+#Opening file in write mode
+fd = open("writeMode.txt", "w")
+fd.write("Hello my name is Harsh. I live in PRY.")
+fd.close()
+
+#Opening file in append mode
+#When trying to append something in a file through the file then we should open the file in append mode.
+fd1 = open("appendMode.txt", "a")
+fd1.write("Hello again my name is still the same. And I live where I was earlier. Yes, Blah Blah Blah.");
+fd1.close()
