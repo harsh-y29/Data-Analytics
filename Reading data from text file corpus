@@ -1,0 +1,4 @@
+fd = open("data.txt", "r")
+txt = fd.read()
+fd.close()
+print(txt)
