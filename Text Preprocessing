@@ -1,0 +1,22 @@
+fd = open("data.txt", "r")
+txt = fd.read()
+fd.close()
+print(txt)
+print()
+
+#Finding total number of paragraphs in the file
+print("Total number of paragraphs:", end = " ")
+para = txt.split("\n\n");
+#print(para)
+print(len(para))
+
+#Finding total number of lines in the file
+print("Total number of lines     :", end = " ")
+lines = txt.split(".")
+#print(lines)
+print(len(lines[:-1])) #print(len(lines)-1)
+
+#Finding total number of words in the file
+print("Total number of words     :", end=" ")
+words = txt.split(" ")
+print(len(words))
