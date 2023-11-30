@@ -1,4 +1,4 @@
-Harsh, 7355675227, harshYadav@gmail.com, 5 Star, 2, 10, Thu Nov 30 06:14:18 2023
-Sneha, 8887765730, snehayadav@gmail.com, Milky Bar, 2, 10, Thu Nov 30 06:14:54 2023
+Harsh, 73556, harsh@gmail.com, 5 Star, 2, 10, Thu Nov 30 06:14:18 2023
+Sneha, 8887, sn@gmail.com, Milky Bar, 2, 10, Thu Nov 30 06:14:54 2023
 hao;f;, 853499, 85349, Milky Bar, 34, 170, Thu Nov 30 06:18:28 2023
 dhghfgh, 645654, 15, 5 Star, 100, 500, Thu Nov 30 06:22:36 2023
