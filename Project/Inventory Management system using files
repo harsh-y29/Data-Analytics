@@ -1,1 +1,77 @@
+import time
 
+fd = open("Inventory.txt", "r")
+products = fd.read().split("\n")
+fd.close()
+
+print("PRODUCT DETAILS")
+print("---------------------------------------")
+for product in products:
+    print(product)
+print("---------------------------------------")
+
+#user input
+userName  = input("Enter your name: ")
+userPhone = input("Enter your phone number: ")
+userMail  = input("Enter your mail-Id: ")
+userInputProd_Id      = input("Enter Product id: ")
+userInputProdQuantity = input("Enter Quantity: ")
+print("---------------------------------------")
+
+updatedProductDetails = []
+productLen = len(products)
+for product in range(0, productLen, 1):
+    productDetails = products[product].split(",")
+    if(productDetails[0] == userInputProd_Id):
+        if(int(productDetails[3]) >= int(userInputProdQuantity)):
+            print("Product Name         : ", productDetails[1])
+            print("Product Price        : ", productDetails[2] + "₹")
+            print("Quantity             : ", userInputProdQuantity)
+            print("---------------------------------------")
+            print("Billing Amount       : ", str(int(userInputProdQuantity)*int(productDetails[2])) + "₹")
+            print("_______________________________________")
+            productDetails[3] = str(int(productDetails[3]) - int(userInputProdQuantity))
+            products[product] = ",".join(productDetails)
+
+            fd = open("sales.txt", "a")
+            salesDetails = f"{userName}, {userPhone}, {userMail}, {productDetails[1]}, {userInputProdQuantity}, {int(userInputProdQuantity)*int(productDetails[2])}, {time.ctime()}\n"
+            fd.write(salesDetails)
+            fd.close()
+        elif(productDetails[3]=="0"):
+            print("We dont't have enough quantity of the product left. Sorry!!😒")
+        else:
+            print(f"We only have {productDetails[3]}. Would you like to purchase them? (Y/N) : ", end="")
+            ch = input()
+            if(ch=='Y' or ch=='y'):
+                print("Product Name         : ", productDetails[1])
+                print("Product Price        : ", productDetails[2] + "₹")
+                print("Quantity             : ", productDetails[3])
+                print("---------------------------------------")
+                print("Billing Amount       : ", str(int(productDetails[3])*int(productDetails[2])) + "₹")
+                print("_______________________________________")
+
+                fd = open("sales.txt", "a")
+                salesDetails = f"{userName}, {userPhone}, {userMail}, {productDetails[1]}, {productDetails[3]}, {int(productDetails[3])*int(productDetails[2])}, {time.ctime()}\n"
+                fd.write(salesDetails)
+                fd.close()
+                productDetails[3] = "0"
+                products[product] = ",".join(productDetails)
+            else:
+                print("Thankyou for coming to the store!🫡")
+    updatedProductDetails.append(products[product])
+    
+print()
+
+print("REMAINING PRODUCTS")
+print("---------------------------------------")
+newList = []
+for product in updatedProductDetails:
+    product += "\n"
+    newList.append(product)
+    print(product[:-1])
+newList[-1] = newList[-1][:-1]
+
+fd = open("Inventory.txt", "w")
+for prod in newList:
+    fd.write(prod)
+fd.close()
