@@ -1,0 +1,19 @@
+import json
+
+records = {101 : {"Name" : "5 Star"           , "Price" : 10 , "Quantity" : 200},
+           102 : {"Name" : "Bar One"          , "Price" : 20 , "Quantity" : 100},
+           103 : {"Name" : "Lollipop"         , "Price" : 10 , "Quantity" : 150},
+           104 : {"Name" : "Kala Khatta"      , "Price" : 10 , "Quantity" : 500},
+           105 : {"Name" : "Black Forest Cake", "Price" : 550, "Quantity" : 10}}
+
+js = json.dumps(records)
+
+fd = open("records.json", "w")
+fd.write(js)
+fd.close()
+
+print(records)
+print(type(records))
+print()
+print(js)
+print(type(js))
