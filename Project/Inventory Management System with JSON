@@ -1,0 +1,72 @@
+import json
+import time
+
+# Reading all Product Details
+fd = open("records.json", "r")
+js = fd.read()
+fd.close()
+
+# Converting back to dictionary format
+records = json.loads(js)
+
+# For saving sales made
+sale = ""
+
+# Printing all Product Details
+print("*****************MENU*****************\n")
+for key in records.keys():
+    space = " " * (17 - len(records[key]["Name"]))
+    print(f"{key} : {records[key]['Name']} {space} | {records[key]['Price']} | {records[key]['Quantity']}")
+print("\n**************************************\n")
+
+# Taking user Input
+userName   = str(input("Enter your name         : "))
+userPhone  = str(input("Enter your phone number : "))
+userMail   = str(input("Enter your mail id      : "))
+userProdId = str(input("Enter Product Id        : "))
+userProdQn = int(input("Enter the Quantity      : "))
+
+if(userProdQn <= records[userProdId]["Quantity"]):
+    print("\n**********PURCHASE DETAILS**********\n")
+    print("Product Name      : ", records[userProdId]["Name"])
+    print("Product Price (₹) : ", records[userProdId]["Price"])
+    print("Quantity          : ", userProdQn)
+    print("\n--------------------------------------")
+    print("Billing Amount (₹): ", records[userProdId]["Price"]*userProdQn)
+    print("--------------------------------------\n")
+    print("**************************************\n")
+
+    sale = f"{userName},{userPhone},{userMail},{userProdId},{records[userProdId]['Name']},{userProdQn},{records[userProdId]['Price']},{records[userProdId]['Price']*userProdQn},{time.ctime()}\n"
+    records[userProdId]["Quantity"] -= userProdQn
+elif(records[userProdId]["Quantity"] == 0):
+    print("Sorry, not enough quantity left.")
+else:
+    print(f"We only have {records[userProdId]['Quantity']}.")
+    ch = input("Would you like to buy it? (Y/N) : ")
+    if(ch == 'Y' or ch == 'y'):
+        print("\n**********PURCHASE DETAILS**********\n")
+        print("Product Name      : ", records[userProdId]["Name"])
+        print("Product Price (₹) : ", records[userProdId]["Price"])
+        print("Quantity          : ", records[userProdId]["Quantity"])
+        print("\n--------------------------------------")
+        print("Billing Amount (₹): ", records[userProdId]["Price"]*records[userProdId]["Quantity"])
+        print("--------------------------------------\n")
+        print("**************************************\n")
+
+        sale = f"{userName},{userPhone},{userMail},{userProdId},{records[userProdId]['Name']},{records[userProdId]['Quantity']},{records[userProdId]['Price']},{records[userProdId]['Price']*records[userProdId]['Quantity']},{time.ctime()}\n"
+        records[userProdId]["Quantity"] = 0
+    else:
+        print("Thanks, for shopping with us.")
+
+# Converting the records details into string format
+js = json.dumps(records)
+
+# Saving the string converted records to the inventory
+fd = open("records.json", 'w')
+fd.write(js)
+fd.close()
+
+# Saving the sales details
+fd = open("jsonSales.txt", 'a')
+fd.write(sale)
+fd.close()
