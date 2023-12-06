@@ -1,0 +1,88 @@
+import numpy as np
+
+arr = np.array([1,2,3,4,5,6,7,8,9,10])
+print(arr)
+print(arr+1)
+print(arr-1)
+print(arr*3)
+print(arr/2)
+print(arr%5)
+print(arr**2)
+
+# max and min function for 1-D array
+print(arr.max())
+print(arr.min())
+
+# max and min for 2-D array
+arr1 = np.array([[1,2,3],
+                [4,5,6],
+                [7,8,9]])
+print(arr1)
+print(arr1.max(axis = 0), type(arr1.max(axis = 0))) # returns an array containing maximum from each column
+print((arr1.max(axis = 0)).max())
+
+print(arr1.max(axis = 1)) # returns an array containing maximum from each row
+print((arr1.max(axis = 1)).max())
+
+# for min we get minimum from each row and column in an array
+# finding sum of all elements in the array
+print(arr1.sum())
+
+arr2 = np.array([[9,8,7],
+                [6,5,4],
+                [3,2,1]])
+
+# Arithmetic operation on array of different shape cannot happen
+print(arr1+arr2)
+
+# Dot product or matrix multiplication
+print(arr1.dot(arr2))
+
+# indexing or slicing on 1-D array 
+# arr = np.array([1,2,3,4,5,6])
+print(arr[:])
+print(arr[0])
+print(arr[1:-2])
+
+# indexing or slicing on 2-D array
+print(arr2[ : , : ])
+print("first row : ", arr2[ : 1, : ])
+print("first column : \n", arr2[ : , : 1])
+print("second row : ", arr2[1 : 2, : ])
+print("second column : \n", arr2[ : , 1 : 2])
+print("middle element : ", arr2[1 : 2, 1 : 2])
+
+# Sorting array 
+print(np.sort(arr2, axis = 1)) # sorting row wise
+print(np.sort(arr2, axis = 0)) # sorting col wise
+
+# joining array horizontally and vertically using hstack and vstack
+print(np.hstack((arr1, arr2)))
+print(np.vstack((arr1, arr2)))
+
+# using concatenation
+print(np.concatenate((arr1, arr2), axis = 1))
+print(np.concatenate((arr1, arr2), axis = 0))
+
+# splitting the array
+joinedArrHori = np.hstack((arr1, arr2))
+joinedArrVert = np.vstack((arr1, arr2))
+print(np.hsplit(joinedArrHori, 2))
+print(np.vsplit(joinedArrVert, 2))
+
+# Automating using numpy
+# Naive way to find element > 5 in arr
+for i in arr:
+    if(i > 5):
+        print(i, end=" ")
+print()
+
+# best way
+print(arr[arr > 5])
+
+# best way to create an array using arange 
+rangeArr = np.arange(1, 11, 3)
+print(rangeArr)
+
+# filtering an numpy array
+print(rangeArr[rangeArr > 4])
